@@ -99,6 +99,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        /// UI 부분
         self.title = "WebRTC Demo"
         self.signalingConnected = false
         self.hasLocalSdp = false
@@ -108,8 +109,10 @@ class MainViewController: UIViewController {
         self.speakerOn = false
         self.webRTCStatusLabel?.text = "New"
         
+        /// Delegate
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
+        /// 연결
         self.signalClient.connect()
     }
     

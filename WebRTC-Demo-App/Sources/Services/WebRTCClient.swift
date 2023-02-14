@@ -265,7 +265,7 @@ extension WebRTCClient {
         setTrackEnabled(RTCVideoTrack.self, isEnabled: isEnabled)
     }
 }
-// MARK:- Audio control
+// MARK: - Audio control
 extension WebRTCClient {
     func muteAudio() {
         self.setAudioEnabled(false)
