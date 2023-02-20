@@ -24,9 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func buildMainViewController() -> UIViewController {
-        
+        /// 구글에서 제공하는 stun서버 5개 init
         let webRTCClient = WebRTCClient(iceServers: self.config.webRTCIceServers)
+        /// signalingServerURL init
         let signalClient = self.buildSignalingClient()
+        /// 의존성 주입
         let mainViewController = MainViewController(signalClient: signalClient, webRTCClient: webRTCClient)
         let navViewController = UINavigationController(rootViewController: mainViewController)
         navViewController.navigationBar.prefersLargeTitles = true
