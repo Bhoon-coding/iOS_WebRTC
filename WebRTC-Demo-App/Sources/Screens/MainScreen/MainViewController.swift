@@ -112,13 +112,16 @@ class MainViewController: UIViewController {
         /// Delegate
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
-        /// 연결
+        /// signaling 연결
         self.signalClient.connect()
     }
     
     @IBAction private func offerDidTap(_ sender: UIButton) {
+        /// local의 sdp 설정
         self.webRTCClient.offer { (sdp) in
+            /// local sdp 설정 완료하면
             self.hasLocalSdp = true
+            /// webSocket으로 sdp정보를 data 타입으로 encoding해서 보냄
             self.signalClient.send(sdp: sdp)
         }
     }
@@ -198,6 +201,10 @@ extension MainViewController: SignalClientDelegate {
 
 extension MainViewController: WebRTCClientDelegate {
     
+    /// localcandidate를 찾으면 호출되는 메서드
+    /// - Parameters:
+    ///   - client: WebRTCClient
+    ///   - candidate: RTCIceCandidate
     func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate) {
         print("discovered local candidate")
         self.localCandidateCount += 1
